@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+rec_reward_3=np.load('rec_reward_3.npy')
+nonrec_reward_3=np.load('nonrec_reward_3.npy')
+rec_reward_4=np.load('rec_reward_4.npy')
+nonrec_reward_4=np.load('nonrec_reward_4.npy')
+rec_reward_5=np.load('rec_reward_5.npy')
+nonrec_reward_5=np.load('nonrec_reward_5.npy')
+rec_reward_6=np.load('rec_reward_6.npy')
+nonrec_reward_6=np.load('nonrec_reward_6.npy')
+rec_reward_7=np.load('rec_reward_7.npy')
+nonrec_reward_7=np.load('nonrec_reward_7.npy')
+# rec_reward_8=np.load('rec_reward_8.npy')
+# nonrec_reward_8=np.load('nonrec_reward_8.npy')
+
+rec_reward=np.array([np.mean(rec_reward_3),np.mean(rec_reward_4),np.mean(rec_reward_5),np.mean(rec_reward_6),np.mean(rec_reward_7)])
+nonrec_reward=np.array([np.mean(nonrec_reward_3),np.mean(nonrec_reward_4),np.mean(nonrec_reward_5),np.mean(nonrec_reward_6),np.mean(nonrec_reward_7)])
+rec_min=np.array([np.min(rec_reward_3),np.min(rec_reward_4),np.min(rec_reward_5),np.min(rec_reward_6),np.min(rec_reward_7)])
+nonrec_min=np.array([np.min(nonrec_reward_3),np.min(nonrec_reward_4),np.min(nonrec_reward_5),np.min(nonrec_reward_6),np.min(nonrec_reward_7)])
+rec_max=np.array([np.max(rec_reward_3),np.max(rec_reward_4),np.max(rec_reward_5),np.max(rec_reward_6),np.max(rec_reward_7)])
+nonrec_max=np.array([np.max(nonrec_reward_3),np.max(nonrec_reward_4),np.max(nonrec_reward_5),np.max(nonrec_reward_6),np.max(nonrec_reward_7)])
+print(rec_reward)
+print(nonrec_reward)
+rec_std=np.array([np.std(rec_reward_3),np.std(rec_reward_4),np.std(rec_reward_5),np.std(rec_reward_6),np.std(rec_reward_7)])
+nonrec_std=np.array([np.std(nonrec_reward_3),np.std(nonrec_reward_4),np.std(nonrec_reward_5),np.std(nonrec_reward_6),np.std(nonrec_reward_7)])
+
+plt.plot([3,4,5,6,7],rec_reward,label='rec')
+plt.fill_between([3,4,5,6,7],rec_reward-rec_std,rec_reward+rec_std,alpha=0.2)
+plt.plot([3,4,5,6,7],nonrec_reward,label='nonrec')
+plt.fill_between([3,4,5,6,7],nonrec_reward-nonrec_std,nonrec_reward+nonrec_std,alpha=0.2)
+plt.legend()
+plt.show()
