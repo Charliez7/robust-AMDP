@@ -28,5 +28,5 @@ for m in range(2000):
 print(rec_reward)
 print('rec',np.mean(rec_reward),np.std(rec_reward),np.min(rec_reward),np.max(rec_reward))
 print('nonrec',np.mean(nonrec_reward),np.std(nonrec_reward),np.min(nonrec_reward),np.max(nonrec_reward))
-np.save('rec_reward_8.npy',rec_reward)
-np.save('nonrec_reward_8.npy',nonrec_reward)
+np.save('rec_reward.npy',rec_reward)
+np.save('nonrec_reward.npy',nonrec_reward)
