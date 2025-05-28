@@ -7,4 +7,7 @@ This is conducted with ```runtime.py```.
 ## General RAMDPs
 This comparison is based on the ellipsoid ambiguity set with ```nonrec_robust_comparison.py```.
 ## Inventory Control
-This experiment follows the steps with 1) data sampling:```ic_data.py```; 2) policy computing:``ic_policy.py```; 3) performance comparison:```ic_test.py```.
+This experiment follows the steps with 
+> 1) data sampling:```ic_data.py```;
+> 2) policy computing:``ic_policy.py```;
+> 3) performance comparison:```ic_test.py```.
