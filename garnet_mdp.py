@@ -5,28 +5,11 @@ import gym
 import xlsxwriter
 from gym.spaces import Discrete
 def generate_dirichlet_rounded(alpha, n, decimals=2):
-    """
-    Generate an n-length Dirichlet vector with a sum of 1.00,
-    rounded to the specified decimal places.
-
-    Parameters:
-        alpha (list): Dirichlet concentration parameters.
-        n (int): Length of the vector.
-        decimals (int): Number of decimal places to round.
-
-    Returns:
-        np.array: Rounded Dirichlet vector summing to 1.00.
-    """
-    # Step 1: Generate Dirichlet vector
-    vector = np.random.dirichlet(alpha)  # Generate vector summing to 1
-
-    # Step 2: Round to the specified decimals
+   
+    vector = np.random.dirichlet(alpha) 
     rounded_vector = np.round(vector, decimals)
-
-    # Step 3: Adjust the last element to ensure the sum is exactly 1.00
     rounded_vector[-1] = 1.0 - np.sum(rounded_vector[:-1])
-    rounded_vector[-1] = round(rounded_vector[-1], decimals)  # Ensure rounding precision
-
+    rounded_vector[-1] = round(rounded_vector[-1], decimals)
     return rounded_vector
 
 def initial_distribution(n):
@@ -89,7 +72,6 @@ class GarnetMDP(gym.Env):
                 # temp_r = np.random.uniform(0, 10)
                 for next_state in range(self.state_num):
                     rewards[state - 1][action - 1][next_state - 1] = np.random.uniform(0, 10)
-                    # rewards[state - 1][action - 1][next_state - 1] = temp_r
         self.rewards=rewards
         return None
 
@@ -102,64 +84,14 @@ class GarnetMDP(gym.Env):
 
 s_num=5
 a_num=3
-folder= "results/nonrec"
 p_init=initial_distribution(s_num)
 env = GarnetMDP(s_num, a_num, p_init, 4)
 env.reset()
 transition_matrix = env.transitions
 branch_matrix = env.branch_matrix
 cost = env.rewards
-# print(cost.shape)
 np.save('transition_matrix.npy',transition_matrix)
 np.save('branch_matrix.npy',branch_matrix)
 np.save('cost.npy',cost)
 np.save('p_init.npy',p_init)
-#
-transition_matrix_2d = transition_matrix.reshape(s_num ,a_num*s_num)
-branch_matrix_2d = branch_matrix.reshape(s_num ,a_num*s_num)
-cost_2d = cost.reshape(s_num ,a_num*s_num)
-# p_init_path=os.path.join(folder,"p_init/p_init.xlsx")
-# transition_matrix_path=os.path.join(folder,"transition_matrix/transition_matrix.xlsx")
-# branch_matrix_path=os.path.join(folder,"branch_matrix/branch_matrix.xlsx")
-# cost_path=os.path.join(folder,"cost/cost.xlsx")
 
-
-# workbook = xlsxwriter.Workbook(p_init_path)
-# worksheet = workbook.add_worksheet()
-#
-#     # Write the values of j into the worksheet
-# for index, value in enumerate(p_init):
-#     worksheet.write(index, 0, value)
-#
-# # Close the workbook
-# workbook.close()
-# workbook = xlsxwriter.Workbook(transition_matrix_path)
-# worksheet = workbook.add_worksheet()
-#
-#     # Write the values of j into the worksheet
-# for row_num, row_data in enumerate(transition_matrix_2d):
-#     for col_num, value in enumerate(row_data):
-#         worksheet.write(row_num, col_num, value)
-#
-# # Close the workbook
-# workbook.close()
-# workbook = xlsxwriter.Workbook(branch_matrix_path)
-# worksheet = workbook.add_worksheet()
-#
-#     # Write the values of j into the worksheet
-# for row_num, row_data in enumerate(branch_matrix_2d):
-#     for col_num, value in enumerate(row_data):
-#         worksheet.write(row_num, col_num, value)
-#
-# # Close the workbook
-# workbook.close()
-# workbook = xlsxwriter.Workbook(cost_path)
-# worksheet = workbook.add_worksheet()
-#
-#     # Write the values of j into the worksheet
-# for row_num, row_data in enumerate(cost_2d):
-#     for col_num, value in enumerate(row_data):
-#         worksheet.write(row_num, col_num, value)
-#
-# # Close the workbook
-# workbook.close()
